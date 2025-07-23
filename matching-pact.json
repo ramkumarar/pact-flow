@@ -1,0 +1,109 @@
+{
+  "consumer": {
+    "name": "UserWebApp"
+  },
+  "provider": {
+    "name": "UserService"
+  },
+  "interactions": [
+    {
+      "description": "Get user by ID - valid user",
+      "request": {
+        "method": "GET",
+        "path": "/users/123",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 123,
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "age": 30
+        }
+      }
+    },
+    {
+      "description": "Get user by ID - user not found",
+      "request": {
+        "method": "GET",
+        "path": "/users/999",
+        "headers": {}
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "message": "User not found",
+          "code": "USER_NOT_FOUND"
+        }
+      }
+    },
+    {
+      "description": "Create new user - valid input",
+      "request": {
+        "method": "POST",
+        "path": "/users",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Jane Smith",
+          "email": "jane.smith@example.com",
+          "age": 25
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 124,
+          "name": "Jane Smith",
+          "email": "jane.smith@example.com",
+          "age": 25
+        }
+      }
+    },
+    {
+      "description": "Get all users with limit",
+      "request": {
+        "method": "GET",
+        "path": "/users",
+        "query": "limit=5",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": [
+          {
+            "id": 123,
+            "name": "John Doe",
+            "email": "john.doe@example.com",
+            "age": 30
+          },
+          {
+            "id": 124,
+            "name": "Jane Smith",
+            "email": "jane.smith@example.com",
+            "age": 25
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

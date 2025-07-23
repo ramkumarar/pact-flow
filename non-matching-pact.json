@@ -1,0 +1,134 @@
+{
+  "consumer": {
+    "name": "MobileApp"
+  },
+  "provider": {
+    "name": "UserService"
+  },
+  "interactions": [
+    {
+      "description": "Get user by ID - expects different response structure",
+      "request": {
+        "method": "GET",
+        "path": "/users/123",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "userId": 123,
+          "fullName": "John Doe",
+          "emailAddress": "john.doe@example.com",
+          "userAge": 30,
+          "isActive": true
+        }
+      }
+    },
+    {
+      "description": "Get user by invalid ID format - string instead of integer",
+      "request": {
+        "method": "GET",
+        "path": "/users/abc",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": "abc",
+          "name": "Test User",
+          "email": "test@example.com"
+        }
+      }
+    },
+    {
+      "description": "Create user - missing required field",
+      "request": {
+        "method": "POST",
+        "path": "/users",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Jane Smith"
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 124,
+          "name": "Jane Smith"
+        }
+      }
+    },
+    {
+      "description": "Get users with invalid query parameter",
+      "request": {
+        "method": "GET",
+        "path": "/users",
+        "query": "limit=500",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": []
+      }
+    },
+    {
+      "description": "Request to non-existent endpoint",
+      "request": {
+        "method": "DELETE",
+        "path": "/users/123",
+        "headers": {}
+      },
+      "response": {
+        "status": 204,
+        "headers": {},
+        "body": ""
+      }
+    },
+    {
+      "description": "Create user with invalid email format",
+      "request": {
+        "method": "POST",
+        "path": "/users",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Invalid User",
+          "email": "not-an-email",
+          "age": -5
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 125,
+          "name": "Invalid User",
+          "email": "not-an-email",
+          "age": -5
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
