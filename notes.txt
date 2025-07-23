@@ -1,0 +1,1 @@
+openapi-pact-comparator ./provider-openapi.yaml ./non-matching-pact.json
