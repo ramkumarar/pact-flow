@@ -1,1 +1,2 @@
 openapi-pact-comparator ./provider-openapi.yaml ./non-matching-pact.json
+.\mods -a google -m gemini-2.5-pro -t "debug_test" "What is 2+2?"
